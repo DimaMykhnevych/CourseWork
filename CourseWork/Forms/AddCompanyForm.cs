@@ -1,6 +1,7 @@
 ﻿using CourseWork.Enums;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CourseWork.Forms
@@ -32,7 +33,12 @@ namespace CourseWork.Forms
         //Добавление компании 
         private void AddCompButton_Click(object sender, EventArgs e)
         {
-            CompanyCollection.AddCompany(AddCompanyToTheDatabase());
+            if (!CheckTelephone())
+            {
+                MessageBox.Show("Некорректно введен номер телефона.",
+                              "Некорректные данные", MessageBoxButtons.OK);
+            }
+            else CompanyCollection.AddCompany(AddCompanyToTheDatabase());
         }
         //Сброс параметров по нажатию на кнопку сбросить
         private void ResetParams_Click(object sender, EventArgs e)
@@ -59,6 +65,20 @@ namespace CourseWork.Forms
                     CheckedListBox clb = (CheckedListBox)c;
                     for (int i = 0; i < clb.Items.Count; i++) clb.SetItemChecked(i, false);
                 }
+            }
+        }
+        //проверка на введенный номер телефона
+        private bool CheckTelephone()
+        {
+            string pattern = @"[3-9]{1}\d{8}";
+            if (Regex.IsMatch(telephtextBox.Text, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+
+                return false;
             }
         }
         //Создание компании по введенным данным

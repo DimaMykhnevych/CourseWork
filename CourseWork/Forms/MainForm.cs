@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace CourseWork
 {
@@ -46,14 +47,22 @@ namespace CourseWork
         //Поиск предприятий по нажатию на кнопку "Поиск"
         private void Findbtn_Click(object sender, EventArgs e)
         {
-            CompanySearchParameter searchedCompany = FindSearchedCompany();
-            var collection = CompanyCollection.Search(searchedCompany);
-            bindListToDataGridView(collection);
-            if (collection.Count == 0)
+            if (!CheckTelephone())
             {
-                MessageBox.Show("Предприятий по заданным параметрам не найдено.",
-                "Поиск", MessageBoxButtons.OK);
-                return;
+                MessageBox.Show("Некорректно введен номер телефона.",
+                              "Некорректные данные", MessageBoxButtons.OK);
+            }
+            else
+            {
+                CompanySearchParameter searchedCompany = FindSearchedCompany();
+                var collection = CompanyCollection.Search(searchedCompany);
+                bindListToDataGridView(collection);
+                if (collection.Count == 0)
+                {
+                    MessageBox.Show("Предприятий по заданным параметрам не найдено.",
+                    "Поиск", MessageBoxButtons.OK);
+                    return;
+                }
             }
         }
         //Сброс параметров для поиска по нажатию на кнопку "Сбросить"
@@ -80,6 +89,11 @@ namespace CourseWork
                 {
                     CheckedListBox clb = (CheckedListBox)c;
                     for (int i = 0; i < clb.Items.Count; i++) clb.SetItemChecked(i, false);
+                }
+                else if (c is NumericUpDown)
+                {
+                    NumericUpDown num = (NumericUpDown)c;
+                    num.Value = 0;
                 }
             }
         }
@@ -126,17 +140,17 @@ namespace CourseWork
         {
             try
             {
-                int ID = Convert.ToInt32(dataGV[0,dataGV.SelectedRows[0].Index].Value);
+                int ID = Convert.ToInt32(dataGV[0, dataGV.SelectedRows[0].Index].Value);
                 ChangeOrSeeCompanyForm form = new ChangeOrSeeCompanyForm(CompanyCollection.GetCompanyById
-                        (Convert.ToInt32(dataGV[0,dataGV.SelectedRows[0].Index].Value)));
+                        (Convert.ToInt32(dataGV[0, dataGV.SelectedRows[0].Index].Value)));
                 form.Writable(false);
                 form.ShowDialog();
                 bindListToDataGridView(CompanyCollection.companies);
             }
             catch (ArgumentOutOfRangeException)
             {
-                    MessageBox.Show("Выберите предприятие для просмотра.",
-                    "Просмотр предприятия", MessageBoxButtons.OK);
+                MessageBox.Show("Выберите предприятие для просмотра.",
+                "Просмотр предприятия", MessageBoxButtons.OK);
                 return;
             }
         }
@@ -146,7 +160,7 @@ namespace CourseWork
         {
             try
             {
-                int ID = Convert.ToInt32(dataGV[0,dataGV.SelectedRows[0].Index].Value);
+                int ID = Convert.ToInt32(dataGV[0, dataGV.SelectedRows[0].Index].Value);
                 ChangeOrSeeCompanyForm form = new ChangeOrSeeCompanyForm(CompanyCollection.GetCompanyById(ID));
 
                 form.Writable(false);
@@ -155,15 +169,29 @@ namespace CourseWork
             }
             catch (ArgumentOutOfRangeException)
             {
-                    MessageBox.Show("Выберите предприятие для изменения.",
-                    "Изменение предприятия", MessageBoxButtons.OK);
+                MessageBox.Show("Выберите предприятие для изменения.",
+                "Изменение предприятия", MessageBoxButtons.OK);
                 return;
             }
             catch (KeyNotFoundException)
             {
-                   MessageBox.Show("Выберите предприятие для изменения.",
-                   "Изменение предприятия", MessageBoxButtons.OK);
+                MessageBox.Show("Выберите предприятие для изменения.",
+                "Изменение предприятия", MessageBoxButtons.OK);
                 return;
+            }
+        }
+        private bool CheckTelephone()
+        {
+            string pattern = @"[3-9]{1}\d{8}";
+            if (Regex.IsMatch(phoneNumberTBox.Text, pattern, RegexOptions.IgnoreCase)
+                || phoneNumberTBox.Text.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+
+                return false;
             }
         }
         //Показ информации о форме по двойному клику по выбранной компании из списка
@@ -171,7 +199,7 @@ namespace CourseWork
         {
             if (e.RowIndex < 0) return;
             int ID = Convert.ToInt32(dataGV[0, e.RowIndex].Value);
-            ChangeOrSeeCompanyForm form =new ChangeOrSeeCompanyForm(CompanyCollection.GetCompanyById(ID));
+            ChangeOrSeeCompanyForm form = new ChangeOrSeeCompanyForm(CompanyCollection.GetCompanyById(ID));
             form.Writable(false);
             form.ShowDialog();
             bindListToDataGridView(CompanyCollection.companies);
@@ -191,7 +219,7 @@ namespace CourseWork
                     {
                         City = citytextBox.Text,
                         Street = streettextBox.Text,
-                        HouseNumber = string.IsNullOrEmpty(houseNumtextBox.Text) ? 0 : Convert.ToInt32(houseNumtextBox.Text)
+                        HouseNumber = (int)houseNumber.Value
                     },
                     Telephone = phoneNumberTBox.Text
                 }
@@ -266,7 +294,6 @@ namespace CourseWork
         {
             DataBaseRepository.Save(CompanyCollection.companies);
         }
-
 
     }
 }

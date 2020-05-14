@@ -92,8 +92,9 @@ namespace CourseWork
             this.label14 = new System.Windows.Forms.Label();
             this.citytextBox = new System.Windows.Forms.TextBox();
             this.streettextBox = new System.Windows.Forms.TextBox();
-            this.houseNumtextBox = new System.Windows.Forms.TextBox();
             this.servicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.houseNumber = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
             this.companyBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGV)).BeginInit();
             this.cellDataGridViewCM.SuspendLayout();
@@ -102,6 +103,7 @@ namespace CourseWork
             ((System.ComponentModel.ISupportInitialize)(this.updatepBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.servicesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.houseNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -233,6 +235,7 @@ namespace CourseWork
             this.nameTBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.nameTBox.Location = new System.Drawing.Point(97, 71);
             this.nameTBox.MaximumSize = new System.Drawing.Size(200, 100);
+            this.nameTBox.MaxLength = 50;
             this.nameTBox.Name = "nameTBox";
             this.nameTBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.nameTBox.Size = new System.Drawing.Size(156, 20);
@@ -330,10 +333,11 @@ namespace CourseWork
             // phoneNumberTBox
             // 
             this.phoneNumberTBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.phoneNumberTBox.Location = new System.Drawing.Point(97, 199);
+            this.phoneNumberTBox.Location = new System.Drawing.Point(124, 199);
             this.phoneNumberTBox.MaximumSize = new System.Drawing.Size(200, 100);
+            this.phoneNumberTBox.MaxLength = 9;
             this.phoneNumberTBox.Name = "phoneNumberTBox";
-            this.phoneNumberTBox.Size = new System.Drawing.Size(156, 20);
+            this.phoneNumberTBox.Size = new System.Drawing.Size(129, 20);
             this.phoneNumberTBox.TabIndex = 44;
             this.phoneNumberTBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -727,6 +731,7 @@ namespace CourseWork
             this.citytextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.citytextBox.Location = new System.Drawing.Point(97, 97);
             this.citytextBox.MaximumSize = new System.Drawing.Size(200, 100);
+            this.citytextBox.MaxLength = 30;
             this.citytextBox.Name = "citytextBox";
             this.citytextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.citytextBox.Size = new System.Drawing.Size(156, 20);
@@ -739,28 +744,38 @@ namespace CourseWork
             this.streettextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.streettextBox.Location = new System.Drawing.Point(97, 117);
             this.streettextBox.MaximumSize = new System.Drawing.Size(200, 100);
+            this.streettextBox.MaxLength = 50;
             this.streettextBox.Name = "streettextBox";
             this.streettextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.streettextBox.Size = new System.Drawing.Size(156, 20);
             this.streettextBox.TabIndex = 152;
             this.streettextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // houseNumtextBox
-            // 
-            this.houseNumtextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.houseNumtextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.houseNumtextBox.Location = new System.Drawing.Point(158, 137);
-            this.houseNumtextBox.MaximumSize = new System.Drawing.Size(200, 100);
-            this.houseNumtextBox.Name = "houseNumtextBox";
-            this.houseNumtextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.houseNumtextBox.Size = new System.Drawing.Size(31, 20);
-            this.houseNumtextBox.TabIndex = 153;
-            this.houseNumtextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // servicesBindingSource
             // 
             this.servicesBindingSource.DataMember = "Services";
             this.servicesBindingSource.DataSource = this.companyBindingSource;
+            // 
+            // houseNumber
+            // 
+            this.houseNumber.Location = new System.Drawing.Point(145, 137);
+            this.houseNumber.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.houseNumber.Name = "houseNumber";
+            this.houseNumber.Size = new System.Drawing.Size(52, 20);
+            this.houseNumber.TabIndex = 154;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(93, 202);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(31, 13);
+            this.label15.TabIndex = 155;
+            this.label15.Text = "+380";
             // 
             // companyBindingSource1
             // 
@@ -771,7 +786,8 @@ namespace CourseWork
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 577);
-            this.Controls.Add(this.houseNumtextBox);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.houseNumber);
             this.Controls.Add(this.streettextBox);
             this.Controls.Add(this.citytextBox);
             this.Controls.Add(this.label14);
@@ -819,6 +835,7 @@ namespace CourseWork
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.servicesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.houseNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -889,6 +906,7 @@ namespace CourseWork
         private Label label14;
         private TextBox citytextBox;
         private TextBox streettextBox;
-        private TextBox houseNumtextBox;
+        private NumericUpDown houseNumber;
+        private Label label15;
     }
 }

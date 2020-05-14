@@ -65,6 +65,7 @@
             this.header = new System.Windows.Forms.Label();
             this.companyName = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -348,6 +349,7 @@
             // telephtextBox
             // 
             this.telephtextBox.Location = new System.Drawing.Point(199, 176);
+            this.telephtextBox.MaxLength = 9;
             this.telephtextBox.Name = "telephtextBox";
             this.telephtextBox.Size = new System.Drawing.Size(100, 20);
             this.telephtextBox.TabIndex = 189;
@@ -474,12 +476,24 @@
             this.idLabel.Size = new System.Drawing.Size(0, 13);
             this.idLabel.TabIndex = 206;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.DarkKhaki;
+            this.label1.ForeColor = System.Drawing.Color.Brown;
+            this.label1.Location = new System.Drawing.Point(168, 180);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 207;
+            this.label1.Text = "+380";
+            // 
             // ChangeOrSeeCompanyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkKhaki;
             this.ClientSize = new System.Drawing.Size(651, 395);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.idLabel);
             this.Controls.Add(this.changeCompButton);
             this.Controls.Add(this.cancel);
@@ -558,5 +572,6 @@
         private System.Windows.Forms.Label header;
         private System.Windows.Forms.Label companyName;
         private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.Label label1;
     }
 }

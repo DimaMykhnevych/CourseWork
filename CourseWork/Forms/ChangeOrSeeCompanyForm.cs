@@ -1,6 +1,7 @@
 ﻿using CourseWork.Enums;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CourseWork.Forms
@@ -24,8 +25,16 @@ namespace CourseWork.Forms
         //Сохранение изменений по нажатию на кнопку "ПОДТВЕРДИТЬ"
         private void BackToMain_Click(object sender, EventArgs e)
         {
-            var comp = CreateCompanyFromForm();
-            CompanyCollection.ChangeCompany(comp.Id, comp);
+            if (!CheckTelephone())
+            {
+                MessageBox.Show("Некорректно введен номер телефона.",
+                              "Некорректные данные", MessageBoxButtons.OK); 
+            }
+            else
+            {
+                var comp = CreateCompanyFromForm();
+                CompanyCollection.ChangeCompany(comp.Id, comp);
+            }
         }
         //Сделать форму доступной для изменения при нажатии на клавишу "ИЗМЕНИТЬ"
         private void ChangeCompButton_Click(object sender, EventArgs e)
@@ -145,6 +154,21 @@ namespace CourseWork.Forms
                         ch.Enabled = verif;
                     }
                 }
+            }
+        }
+
+        //проверка на введенный номер телефона
+        private bool CheckTelephone()
+        {
+            string pattern = @"[3-9]{1}\d{8}";
+            if (Regex.IsMatch(telephtextBox.Text, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+
+                return false;
             }
         }
         //проверка на ввод начального времени

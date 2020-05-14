@@ -64,6 +64,7 @@
             this.header = new System.Windows.Forms.Label();
             this.companyName = new System.Windows.Forms.Label();
             this.addCompButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -334,6 +335,7 @@
             // telephtextBox
             // 
             this.telephtextBox.Location = new System.Drawing.Point(193, 164);
+            this.telephtextBox.MaxLength = 9;
             this.telephtextBox.Name = "telephtextBox";
             this.telephtextBox.Size = new System.Drawing.Size(100, 20);
             this.telephtextBox.TabIndex = 160;
@@ -465,12 +467,24 @@
             this.addCompButton.UseVisualStyleBackColor = false;
             this.addCompButton.Click += new System.EventHandler(this.AddCompButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.GhostWhite;
+            this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label1.Location = new System.Drawing.Point(157, 168);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 208;
+            this.label1.Text = "+380";
+            // 
             // AddCompanyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(651, 395);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.addCompButton);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.resetParams);
@@ -548,5 +562,6 @@
         private System.Windows.Forms.Label header;
         private System.Windows.Forms.Label companyName;
         private System.Windows.Forms.Button addCompButton;
+        private System.Windows.Forms.Label label1;
     }
 }
