@@ -111,6 +111,8 @@ namespace CourseWork
             // 
             this.dataGV.AllowUserToAddRows = false;
             this.dataGV.AllowUserToDeleteRows = false;
+            this.dataGV.AllowUserToResizeColumns = false;
+            this.dataGV.AllowUserToResizeRows = false;
             this.dataGV.AutoGenerateColumns = false;
             this.dataGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;

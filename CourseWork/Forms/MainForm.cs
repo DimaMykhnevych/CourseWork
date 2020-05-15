@@ -13,6 +13,8 @@ namespace CourseWork
     //просмотра/изменения/добавления компании.
     public partial class MainForm : Form
     {
+        private BindingList<Company> foundCompanies;
+        private bool isFormClosingThroughMenuButton;
         public MainForm()
         {
             InitializeComponent();
@@ -42,6 +44,13 @@ namespace CourseWork
         //Выход из приложения по нажатию на соответсвующий пункт меню в разделе "Файл"
         private void ExitTStrMenu_Click(object sender, EventArgs e)
         {
+            isFormClosingThroughMenuButton = true;
+            DialogResult dialogResult = MessageBox.Show("Хотите ли вы сохранить найденные предприятия?",
+               "Сохранение предприятия", MessageBoxButtons.YesNo);
+            if(dialogResult == DialogResult.Yes)
+            {
+                DataBaseRepository.Save(foundCompanies, "searchResult.json");
+            }
             Close();
         }
         //Поиск предприятий по нажатию на кнопку "Поиск"
@@ -50,13 +59,14 @@ namespace CourseWork
             if (!CheckTelephone())
             {
                 MessageBox.Show("Некорректно введен номер телефона.",
-                              "Некорректные данные", MessageBoxButtons.OK);
+                              "Некорректные данные", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 CompanySearchParameter searchedCompany = FindSearchedCompany();
                 var collection = CompanyCollection.Search(searchedCompany);
                 bindListToDataGridView(collection);
+                foundCompanies = collection;
                 if (collection.Count == 0)
                 {
                     MessageBox.Show("Предприятий по заданным параметрам не найдено.",
@@ -293,6 +303,15 @@ namespace CourseWork
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DataBaseRepository.Save(CompanyCollection.companies);
+            if (!isFormClosingThroughMenuButton)
+            {
+                DialogResult dialogResult = MessageBox.Show("Хотите ли вы сохранить найденные предприятия?",
+                 "Сохранение предприятия", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    DataBaseRepository.Save(foundCompanies, "searchResult.json");
+                }
+            }
         }
 
     }

@@ -54,7 +54,6 @@
             this.telephLabel = new System.Windows.Forms.Label();
             this.cathegorycomboBox = new System.Windows.Forms.ComboBox();
             this.cathegory = new System.Windows.Forms.Label();
-            this.houseNumtextBox = new System.Windows.Forms.TextBox();
             this.houseNum = new System.Windows.Forms.Label();
             this.streettextBox = new System.Windows.Forms.TextBox();
             this.Street = new System.Windows.Forms.Label();
@@ -65,7 +64,9 @@
             this.companyName = new System.Windows.Forms.Label();
             this.addCompButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.houseNumber = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.houseNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // cancel
@@ -376,13 +377,6 @@
             this.cathegory.TabIndex = 157;
             this.cathegory.Text = "Разряд";
             // 
-            // houseNumtextBox
-            // 
-            this.houseNumtextBox.Location = new System.Drawing.Point(224, 133);
-            this.houseNumtextBox.Name = "houseNumtextBox";
-            this.houseNumtextBox.Size = new System.Drawing.Size(38, 20);
-            this.houseNumtextBox.TabIndex = 156;
-            // 
             // houseNum
             // 
             this.houseNum.AutoSize = true;
@@ -396,6 +390,7 @@
             // streettextBox
             // 
             this.streettextBox.Location = new System.Drawing.Point(193, 112);
+            this.streettextBox.MaxLength = 50;
             this.streettextBox.Name = "streettextBox";
             this.streettextBox.Size = new System.Drawing.Size(100, 20);
             this.streettextBox.TabIndex = 154;
@@ -413,6 +408,7 @@
             // citytextBox
             // 
             this.citytextBox.Location = new System.Drawing.Point(193, 86);
+            this.citytextBox.MaxLength = 30;
             this.citytextBox.Name = "citytextBox";
             this.citytextBox.Size = new System.Drawing.Size(100, 20);
             this.citytextBox.TabIndex = 152;
@@ -430,6 +426,7 @@
             // nametextBox
             // 
             this.nametextBox.Location = new System.Drawing.Point(193, 58);
+            this.nametextBox.MaxLength = 50;
             this.nametextBox.Name = "nametextBox";
             this.nametextBox.Size = new System.Drawing.Size(100, 20);
             this.nametextBox.TabIndex = 150;
@@ -457,7 +454,6 @@
             // addCompButton
             // 
             this.addCompButton.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.addCompButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.addCompButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.addCompButton.Location = new System.Drawing.Point(136, 331);
             this.addCompButton.Name = "addCompButton";
@@ -478,12 +474,25 @@
             this.label1.TabIndex = 208;
             this.label1.Text = "+380";
             // 
+            // houseNumber
+            // 
+            this.houseNumber.Location = new System.Drawing.Point(224, 138);
+            this.houseNumber.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.houseNumber.Name = "houseNumber";
+            this.houseNumber.Size = new System.Drawing.Size(45, 20);
+            this.houseNumber.TabIndex = 209;
+            // 
             // AddCompanyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(651, 395);
+            this.Controls.Add(this.houseNumber);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addCompButton);
             this.Controls.Add(this.cancel);
@@ -505,7 +514,6 @@
             this.Controls.Add(this.telephLabel);
             this.Controls.Add(this.cathegorycomboBox);
             this.Controls.Add(this.cathegory);
-            this.Controls.Add(this.houseNumtextBox);
             this.Controls.Add(this.houseNum);
             this.Controls.Add(this.streettextBox);
             this.Controls.Add(this.Street);
@@ -519,6 +527,7 @@
             this.Load += new System.EventHandler(this.AddCompanyForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.houseNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -552,7 +561,6 @@
         private System.Windows.Forms.Label telephLabel;
         private System.Windows.Forms.ComboBox cathegorycomboBox;
         private System.Windows.Forms.Label cathegory;
-        private System.Windows.Forms.TextBox houseNumtextBox;
         private System.Windows.Forms.Label houseNum;
         private System.Windows.Forms.TextBox streettextBox;
         private System.Windows.Forms.Label Street;
@@ -563,5 +571,6 @@
         private System.Windows.Forms.Label companyName;
         private System.Windows.Forms.Button addCompButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown houseNumber;
     }
 }

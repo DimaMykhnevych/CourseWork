@@ -26,6 +26,20 @@ namespace CourseWork
             File.WriteAllText(path, jsonString, Encoding.UTF8);
         }
         /// <summary>
+        /// Данный метод сохраняет данные в файл
+        /// </summary>
+        /// <param name="companies"></param>
+        public static void Save(BindingList<Company> companies, string filePath)
+        {
+            jsonString = JsonSerializer.Serialize(companies, typeof(BindingList<Company>),
+                new JsonSerializerOptions()
+                {
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create
+                (System.Text.Unicode.UnicodeRanges.All)
+                });
+            File.WriteAllText(filePath, jsonString, Encoding.UTF8);
+        }
+        /// <summary>
         /// Данный метод считывает данные с файла
         /// </summary>
         /// <returns></returns>

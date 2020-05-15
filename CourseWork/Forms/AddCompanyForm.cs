@@ -36,10 +36,62 @@ namespace CourseWork.Forms
             if (!CheckTelephone())
             {
                 MessageBox.Show("Некорректно введен номер телефона.",
-                              "Некорректные данные", MessageBoxButtons.OK);
+                              "Некорректные данные", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else CompanyCollection.AddCompany(AddCompanyToTheDatabase());
+            else if (!PassAllFields())
+            {
+                MessageBox.Show("Заполните все поля.",
+                              "Некорректные данные", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                CompanyCollection.AddCompany(AddCompanyToTheDatabase());
+                Close();
+            }
         }
+        //проверка на то, что введены все данные
+        private bool PassAllFields()
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (((TextBox)c).Text == "") return false;
+                }
+
+                else if (c is ComboBox)
+                {
+                    if (((ComboBox)c).SelectedIndex == 0) return false;
+                }
+
+                else if (c is GroupBox)
+                {
+                    int count = 0;
+                    GroupBox gb = (GroupBox)c;
+                    foreach (CheckBox ch in gb.Controls)
+                    {
+                        if (ch.Checked == false) count++;
+                    }
+                    if (c.Controls.Count == count) return false;
+
+                }
+                else if (c is NumericUpDown)
+                {
+                    if (((NumericUpDown)c).Value == 0) return false;
+                }
+                else if (c is CheckedListBox)
+                {
+                    CheckedListBox clb = (CheckedListBox)c;
+
+                    if (clb.CheckedItems.Count == 0)
+                    {
+                        clb.SetItemChecked(clb.Items.Count - 1, true);
+                    }
+                }
+            }
+            return true;
+        }
+
         //Сброс параметров по нажатию на кнопку сбросить
         private void ResetParams_Click(object sender, EventArgs e)
         {
@@ -97,7 +149,7 @@ namespace CourseWork.Forms
                     {
                         City = citytextBox.Text,
                         Street = streettextBox.Text,
-                        HouseNumber = string.IsNullOrEmpty(houseNumtextBox.Text) ? 0 : Convert.ToInt32(houseNumtextBox.Text)
+                        HouseNumber = (int)houseNumber.Value
                     },
                     Telephone = telephtextBox.Text
                 }
